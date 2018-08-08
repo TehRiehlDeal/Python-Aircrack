@@ -14,6 +14,10 @@ def airmon(test):
 		#devList = [devList.strip() for word in file]
 	scanDevices()
 
+	"""g = open ("dev2", "r")
+	for line in g:
+		print(line)
+	com = input("What is your wireless interface? ")"""
 	subprocess.Popen(["sudo", "airmon-ng", "start", test])
 
 def adapter():
