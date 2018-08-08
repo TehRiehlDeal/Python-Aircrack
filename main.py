@@ -11,13 +11,13 @@ deviceList = ""
 def airmon(test):
 	with open("deviceList") as file:
 		devList = file.readlines()
-		#devList = [devList.strip() for word in file]
+		devList = [devList.strip() for word in file]
 	scanDevices()
 
-	"""g = open ("dev2", "r")
+	g = open ("dev2", "r")
 	for line in g:
 		print(line)
-	com = input("What is your wireless interface? ")"""
+	com = input("What is your wireless interface? ")
 	subprocess.Popen(["sudo", "airmon-ng", "start", test])
 
 def adapter():
@@ -38,27 +38,27 @@ def stopMon():
 	subprocess.Popen(["sudo", "airmon-ng", "stop", mon])
 
 def startDump():
-	#choice = input("Do you want to start or stop?")
-	#os.system("mate-terminal")
-	#os.system("sudo airodump-ng -c 1,6,11 -w test mon0")
+	choice = input("Do you want to start or stop? ")
+	os.system("gnome-terminal")
+	os.system("sudo airodump-ng -c 1,6,11 -w test mon0")
 	f = open("DumpProcess.txt", "w")
 	p = subprocess.Popen(["sudo", "airodump-ng", "-c 1,6,11", "-w test", "mon0"])
 	pid = p.pid
 	a = str(p.pid)
 	f.write(a)
-	#return p
+	return p
 
 def startMDK():
 	q = subprocess.Popen(["sudo", "mdk3", "mon0", "d", "-c 1,6,11"])
-	#return q
+	return q
 
 def stopDump():
 	os.system("sudo pkill -f airodump")
-	#f = open("DumpProcess.txt", "r")
-	#for	line in f:
-	#	a = int(line)
-	#	os.kill(pid, signal.SIGKILL)
-	#	break
+	f = open("DumpProcess.txt", "r")
+	for	line in f:
+		a = int(line)
+		os.kill(pid, signal.SIGKILL)
+		break
 def stopMDK():
 	os.system("sudo pkill -f mdk3")
 
@@ -103,8 +103,8 @@ class App:
 			airmonSelect.add_command(label=line, command=lambda: airmon(line))
 
 
-		#self.detAdapter = Button(frame, text="Determine Wireless Adapter", command=adapter)
-		#self.detAdapter.pack(side=LEFT)
+		self.detAdapter = Button(frame, text="Determine Wireless Adapter", command=adapter)
+		self.detAdapter.pack(side=LEFT)
 
 		#self.sudo = Button(frame, text="Load Sudo", command=sudo)
 		#self.sudo.pack(side=LEFT)
@@ -129,7 +129,7 @@ class App:
 		self.stopMDK.pack(side=LEFT)
 
 		self.quit = Button(frame2, text="Quit", command=frame.quit)
-		#self.quit.pack()
+		self.quit.pack()
 
 root = Tk()
 mon = 0
